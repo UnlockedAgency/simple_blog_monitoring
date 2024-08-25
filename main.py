@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import sqlite3
 import smtplib
 from email.mime.text import MIMEText
-import schedule
 import time
 import config
 
@@ -77,12 +76,6 @@ def send_email_alert(url, title, post_url):
 
 
 if __name__ == "__main__":
+    print("Cron job ran successfully.")
     setup_database()  # Initialize the database
-
-    check_for_new_posts()  # Run the check immediately for testing
-
-    schedule.every().day.at("09:00").do(check_for_new_posts)
-    
-    while True:
-        schedule.run_pending()
-        time.sleep(60)
+    check_for_new_posts()  # Run the check immediately when the script is executed
